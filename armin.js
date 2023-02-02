@@ -12,17 +12,24 @@
     let factory = {
         facName : 'Volkswagen Wolfsburg Plant',
         calculateWorkload : function (){
-            let workload= workload.map(employeeWeeklyWorkload)
+            const employeeWorkData = this.employeeWeeklyWorkload;
+            const worksResData = [];
+            if(employeeWorkData && employeeWorkData.length > 0) {
+                for (let emp of employeeWorkData) {
+                    worksResData.push(emp.workload || emp.timeSpent)
+                }
+                return worksResData
+            } else 'Invalid Data';
         },
         formatArray : function (name) {
-            return this.employeeName + " " + this.timeSpent;
+            const employeeData = this.employees;
+            if (employeeData && employeeData.length > 0) {
+                employeeData.find((el) => el.name === name );
+                return{ name : emp.name , timeLeft , 5 - emp.timeSpent};
+            } else return 'Invalid Data';
         }
         
     }
-   // calculateWorkload : workloadData.map(a => a.workload)
-
-    
-    //var result = getFields(objArray, "foo"); // returns [ 1, 3, 5 ]
 
     let factoryEmployees = {
         employees : [{name : "John", timeSpent : 1 } , {name : "Sam", timeSpent : 3 },{name : "Maria", timeSpent : 2 },{name : "Dan", timeSpent : 4 },{name : "Lorelai", timeSpent : 5 }],
@@ -32,10 +39,9 @@
     let workloadData = {
         employeeWeeklyWorkload : [{name : "John", workload : 40 } , {name : "Sam", timeSpent : 25 },{name : "Maria", timeSpent : 28 },{name : "Dan", timeSpent : 30 },{name : "Lorelai", timeSpent : 31 }]
     }
-   // let fullName = person.fullName.bind(member)
 
-    console.log(calculateWorkload) ;
-    console.log(formatArray)
+    let workArr = factory.calculateWorkload.bind(worksResData)
+    console.log(workArr)
 
 //Task 2
 
